@@ -3,189 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor Pro | VilchesLinense</title>
-    <!-- Importamos una fuente elegante -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Conversor Pro | Real-Time</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0f1a;
-            --accent: #00d2ff;
-            --card: rgba(255, 255, 255, 0.07);
-            --border: rgba(255, 255, 255, 0.15);
+            --bg: #0f172a;
+            --accent: #38bdf8;
+            --card: #1e293b;
+            --border: #334155;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 210, 255, 0.05) 0%, transparent 40%);
-            color: white;
+            background: var(--bg);
+            color: var(--text-main);
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding: 20px;
             min-height: 100vh;
+        }
+
+        .btn-volver {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-volver:hover { border-color: var(--accent); color: var(--accent); }
+
+        .container { width: 100%; max-width: 450px; }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 { text-align: center; margin-bottom: 30px; font-weight: 800; color: var(--accent); }
+
+        .box {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        label { display: block; color: var(--text-dim); font-size: 0.75rem; margin-bottom: 5px; font-weight: 600; }
+
+        .input-row { display: flex; align-items: center; gap: 10px; }
+
+        input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 100%;
+            outline: none;
+        }
+
+        select {
+            background: var(--bg);
+            color: white;
+            border: 1px solid var(--border);
+            padding: 5px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .swap-btn {
+            display: block;
+            margin: -5px auto 10px;
+            background: var(--accent);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+            z-index: 2;
+            position: relative;
+        }
+
+        .info-table {
+            margin-top: 25px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
             padding: 20px;
         }
 
-        /* BOTÓN VOLVER */
-        .btn-volver {
-            text-decoration: none;
-            background: var(--card);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border: 1px solid var(--border);
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .info-title { font-size: 0.85rem; color: var(--accent); margin-bottom: 15px; font-weight: 700; text-align: center; }
+
+        .row-table {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
         }
-        .btn-volver:hover {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-        }
-
-        /* TARJETA PRINCIPAL */
-        .card {
-            background: var(--card);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        h2 { margin: 0 0 30px 0; color: var(--accent); font-size: 1.8rem; }
-
-        .input-group { margin-bottom: 25px; text-align: left; }
-        
-        label { 
-            display: block; 
-            margin-bottom: 10px; 
-            color: #94a3b8; 
-            font-size: 0.75rem; 
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #334155;
-            border-radius: 16px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: border 0.3s;
-            box-sizing: border-box;
-        }
-
-        input:focus, select:focus { border-color: var(--accent); }
-
-        /* ÁREA DE RESULTADO */
-        .resultado-box {
-            background: rgba(0, 210, 255, 0.1);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px dashed var(--accent);
-            margin-top: 20px;
-        }
-
-        #resultado { 
-            font-size: 2.5rem; 
-            font-weight: 800; 
-            color: var(--accent); 
-            margin: 0;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
-        }
-
-        .info { font-size: 0.7rem; color: #64748b; margin-top: 10px; }
+        .row-table:last-child { border: none; }
+        .val-orig { font-weight: 600; }
+        .val-dest { color: var(--accent); font-weight: 700; }
     </style>
 </head>
 <body>
 
     <a href="https://vilcheslinense4.github.io/Mi-primer-portafolios/" class="btn-volver">← Volver al Portafolio</a>
 
-    <div class="card">
-        <h2>💱 Conversor Pro</h2>
-        
-        <div class="input-group">
-            <label>CANTIDAD EN EUROS (€)</label>
-            <input type="number" id="cantidad" placeholder="Escribe un importe..." oninput="convertir()">
+    <div class="container">
+        <div class="card">
+            <h2>Conversor Real-Time</h2>
+            
+            <div class="box">
+                <label>DESDE</label>
+                <div class="input-row">
+                    <input type="number" id="input-top" value="1" oninput="calcular(true)">
+                    <select id="select-top" onchange="calcular(true)">
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="USD">USD</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="swap-btn" onclick="swap()">⇅</button>
+
+            <div class="box">
+                <label>A</label>
+                <div class="input-row">
+                    <input type="number" id="input-bottom" oninput="calcular(false)">
+                    <select id="select-bottom" onchange="calcular(true)">
+                        <option value="GBP">GBP</option>
+                        <option value="EUR" selected>EUR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="exchange-rate" style="text-align: center; font-size: 0.8rem; color: var(--text-dim); margin-top: 15px;">
+                Cargando datos del mercado...
+            </div>
         </div>
 
-        <div class="input-group">
-            <label>CONVERTIR A:</label>
-            <select id="moneda" onchange="convertir()">
-                <optgroup label="Principales">
-                    <option value="1.08">Dólar Estadounidense (USD)</option>
-                    <option value="0.86">Libra Esterlina (GBP)</option>
-                    <option value="168.45">Yen Japonés (JPY)</option>
-                    <option value="0.97">Franco Suizo (CHF)</option>
-                </optgroup>
-                <optgroup label="Latinoamérica">
-                    <option value="18.50">Peso Mexicano (MXN)</option>
-                    <option value="950.40">Peso Chileno (CLP)</option>
-                    <option value="4200.50">Peso Colombiano (COP)</option>
-                    <option value="880.20">Peso Argentino (ARS)</option>
-                    <option value="5.40">Real Brasileño (BRL)</option>
-                </optgroup>
-                <optgroup label="Otros">
-                    <option value="1.62">Dólar Australiano (AUD)</option>
-                    <option value="1.48">Dólar Canadiense (CAD)</option>
-                    <option value="7.80">Yuan Chino (CNY)</option>
-                </optgroup>
-            </select>
-        </div>
-
-        <div class="resultado-box">
-            <p id="resultado">0.00</p>
-            <p class="info">Actualización instantánea</p>
+        <div class="info-table">
+            <div class="info-title">📊 Escala de Cambio (Datos Reales)</div>
+            <div id="tabla-dinamica"></div>
         </div>
     </div>
 
     <script>
-        function convertir() {
-            const euros = document.getElementById('cantidad').value;
-            const select = document.getElementById('moneda');
-            const tasa = select.value;
-            const monedaTexto = select.options[select.selectedIndex].text;
-            const display = document.getElementById('resultado');
+        const apiURL = "https://open.er-api.com/v6/latest/EUR";
+        let rates = {};
 
-            if (euros > 0) {
-                // Cálculo con 2 decimales y formato local
-                const calculo = (euros * tasa).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                
-                // Lógica de símbolos
-                let simbolo = "";
-                if (monedaTexto.includes("USD") || monedaTexto.includes("MXN") || monedaTexto.includes("CLP") || monedaTexto.includes("COP") || monedaTexto.includes("ARS")) {
-                    simbolo = "$";
-                } else if (monedaTexto.includes("GBP")) {
-                    simbolo = "£";
-                } else if (monedaTexto.includes("JPY") || monedaTexto.includes("CNY")) {
-                    simbolo = "¥";
-                } else if (monedaTexto.includes("BRL")) {
-                    simbolo = "R$";
-                } else {
-                    simbolo = "";
-                }
-
-                display.innerText = `${simbolo}${calculo}`;
-            } else {
-                display.innerText = "0.00";
+        async function obtenerTasasReales() {
+            try {
+                const respuesta = await fetch(apiURL);
+                const datos = await respuesta.json();
+                rates = datos.rates;
+                calcular(true);
+            } catch (error) {
+                document.getElementById('exchange-rate').innerText = "Error al conectar con la API";
             }
         }
+
+        function calcular(isTop) {
+            if (!rates["GBP"]) return;
+            const topCurr = document.getElementById('select-top').value;
+            const botCurr = document.getElementById('select-bottom').value;
+            const topInput = document.getElementById('input-top');
+            const botInput = document.getElementById('input-bottom');
+            const tasa = rates[botCurr] / rates[topCurr];
+
+            if (isTop) {
+                botInput.value = (topInput.value * tasa).toFixed(2);
+            } else {
+                topInput.value = (botInput.value / tasa).toFixed(2);
+            }
+            actualizarInfo(topCurr, botCurr, tasa);
+        }
+
+        function swap() {
+            const sTop = document.getElementById('select-top');
+            const sBot = document.getElementById('select-bottom');
+            const temp = sTop.value;
+            sTop.value = sBot.value;
+            sBot.value = temp;
+            calcular(true);
+        }
+
+        function actualizarInfo(tC, bC, tasa) {
+            document.getElementById('exchange-rate').innerText = `1 ${tC} = ${tasa.toFixed(4)} ${bC}`;
+            const tabla = document.getElementById('tabla-dinamica');
+            const ejemplos = [1, 10, 100, 500, 1000, 1500];
+            let html = "";
+            ejemplos.forEach(val => {
+                html += `<div class="row-table"><span class="val-orig">${val} ${tC}</span><span class="val-dest">${(val * tasa).toFixed(2)} ${bC}</span></div>`;
+            });
+            tabla.innerHTML = html;
+        }
+
+        obtenerTasasReales();
     </script>
 </body>
 </html>
